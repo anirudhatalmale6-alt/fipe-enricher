@@ -1,14 +1,11 @@
 """
-FIPE Table Enricher for Auction Lot Spreadsheets
-=================================================
-Reads an Excel file with vehicle auction lots, queries the FIPE API
-for each vehicle's valuation, and writes the result back to the spreadsheet.
+FIPE Table Enricher - Hybrid offline/API approach
+==================================================
+Cars: matched against local CSV dataset (fipe_completa.csv)
+Motos: matched against cached API data + live API fallback
 
 Usage:
     python fipe_enricher.py lotes_leilao.xlsx
-
-Output:
-    lotes_leilao_com_fipe.xlsx (enriched file with FIPE values)
 
 Requirements:
     pip install openpyxl requests
@@ -19,52 +16,51 @@ import time
 import json
 import re
 import os
+import csv
 from difflib import SequenceMatcher
+from collections import defaultdict
 import requests
 import openpyxl
 
 API_BASE = "https://parallelum.com.br/fipe/api/v1"
 CACHE_FILE = "fipe_cache.json"
+CSV_FILE = "fipe_completa.csv"
 
-# Brand mapping: spreadsheet name -> (vehicle_type, fipe_brand_code)
-# vehicle_type: "carros" or "motos"
-BRAND_MAP = {
-    # Cars
-    "CHEVROLET": ("carros", "23"),
-    "CHEV": ("carros", "23"),
-    "GM": ("carros", "23"),
-    "FIAT": ("carros", "21"),
-    "FORD": ("carros", "22"),
-    "VW": ("carros", "59"),
-    "PEUGEOT": ("carros", "44"),
-    "RENAULT": ("carros", "48"),
-    "CITROEN": ("carros", "13"),
-    "M.BENZ": ("carros", "39"),
-    "MERCEDES": ("carros", "39"),
-    "TOYOTA": ("carros", "56"),
-    "HYUNDAI": ("carros", "26"),
-    "CHERY": ("carros", "182"),
-    "GEELY": ("carros", "199"),
-    # Motorcycles
-    "YAMAHA": ("motos", "101"),
-    "SUNDOWN": ("motos", "98"),
-    "DAFRA": ("motos", "145"),
-    "SHINERAY": ("motos", "134"),
-    "JTZ": ("motos", "209"),
+BRAND_MAP_CARROS = {
+    "CHEVROLET": "GM - Chevrolet", "CHEV": "GM - Chevrolet", "GM": "GM - Chevrolet",
+    "FIAT": "Fiat", "FORD": "Ford", "VW": "VW - VolksWagen",
+    "PEUGEOT": "Peugeot", "RENAULT": "Renault", "CITROEN": "Citroën",
+    "M.BENZ": "Mercedes-Benz", "MERCEDES": "Mercedes-Benz",
+    "TOYOTA": "Toyota", "HYUNDAI": "Hyundai",
+    "CHERY": "Caoa Chery/Chery", "GEELY": "GEELY",
 }
 
-# Honda appears in both cars and motos - detect by model keywords
+BRAND_MAP_MOTOS_API = {
+    "YAMAHA": "101", "SUNDOWN": "98", "DAFRA": "145",
+    "SHINERAY": "134", "JTZ": "209", "HONDA": "80",
+}
+
 MOTO_KEYWORDS = [
-    "CG", "CBX", "BIZ", "NXR", "XRE", "CB", "TITAN", "FAN", "FACTOR",
+    "CG", "CBX", "BIZ", "NXR", "XRE", "CB ", "TITAN", "FAN", "FACTOR",
     "FAZER", "YBR", "NEO", "LANDER", "CRYPTON", "LEAD", "PCX", "POP",
     "BROS", "TWISTER", "TORNADO", "FALCON", "SPEED", "PHOENIX", "CHOPPER",
-    "CARGO", "START", "CROSSER", "XTZ", "FZ25", "BURGMAN", "INTRUDER"
+    "CARGO", "START", "CROSSER", "XTZ", "FZ25", "BURGMAN", "INTRUDER",
+    "C100", "C 100", "MAX", "WEB",
 ]
 
 CAR_KEYWORDS = [
     "CIVIC", "FIT", "CITY", "HR-V", "HRV", "WR-V", "ACCORD", "CR-V",
-    "ML", "CLASS", "TUCSON", "CRETA", "HB20", "IX35"
+    "ML", "CLASS", "TUCSON", "CRETA", "HB20", "IX35",
 ]
+
+NOISE_WORDS = {
+    "gl", "gls", "glx", "ex", "exs", "lx", "lt", "ltz", "ls", "se", "sx",
+    "dx", "xs", "xr", "ghia", "attract", "comfort", "expression", "dynamique",
+    "privilege", "prestige", "premier", "at", "mt", "aut", "mec", "flex",
+    "flexone", "flexpower", "econoflex", "mpfi", "mpi", "efi", "vhc",
+    "8v", "16v", "24v", "32v", "2p", "3p", "4p", "5p",
+    "gasolina", "alcool", "diesel", "gnv",
+}
 
 
 def load_cache():
@@ -79,218 +75,346 @@ def save_cache(cache):
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
 
-def api_get(url, cache, retries=3):
+API_BLOCKED = False
+
+def api_get(url, cache, retries=2, delay=2.0):
+    global API_BLOCKED
     if url in cache:
         return cache[url]
+    if API_BLOCKED:
+        return None
     for attempt in range(retries):
         try:
-            time.sleep(0.5)
+            time.sleep(delay)
             resp = requests.get(url, timeout=15)
             if resp.status_code == 200:
                 data = resp.json()
                 if isinstance(data, dict) and "error" in data:
-                    cache[url] = None
+                    if "limite de taxa" in str(data.get("error", "")):
+                        API_BLOCKED = True
+                        print("    [API blocked by rate limit - using cache only]", flush=True)
                     return None
                 cache[url] = data
                 return data
             elif resp.status_code == 429:
-                wait = 5 * (attempt + 1)
-                print(f"    Rate limited, waiting {wait}s...")
-                time.sleep(wait)
-            else:
-                cache[url] = None
+                API_BLOCKED = True
+                print("    [API rate limited - using cache only]", flush=True)
                 return None
-        except Exception as e:
+            else:
+                return None
+        except Exception:
             if attempt < retries - 1:
-                time.sleep(2)
-            else:
-                print(f"    API error: {e}")
-                cache[url] = None
-                return None
+                time.sleep(3)
     return None
 
 
-def parse_vehicle(description, fab_mod):
-    """Parse brand, model, and year from spreadsheet fields."""
-    desc = description.strip()
+def normalize_model(text):
+    t = text.strip()
+    t = re.sub(r'([A-Za-z])(\d)', r'\1 \2', t)
+    t = re.sub(r'(\d)([A-Za-z])', r'\1 \2', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
 
-    # Remove I/ or IMP/ prefix (imported vehicles)
+
+def extract_cc(text):
+    t = normalize_model(text).lower()
+    matches = re.findall(r'\b(\d{2,4})\b', t)
+    for m in matches:
+        val = int(m)
+        if 50 <= val <= 1000 and val not in range(1980, 2030):
+            return val
+    return None
+
+
+def extract_displacement_liters(text):
+    t = text.lower().replace(",", ".")
+    m = re.search(r'(\d)\.(\d)\s*l?\b', t)
+    if m:
+        return float(f"{m.group(1)}.{m.group(2)}")
+    m = re.search(r'\b(\d)(\d)l\b', t)
+    if m:
+        return float(f"{m.group(1)}.{m.group(2)}")
+    m = re.search(r'\b(\d\.\d)\b(?!\s*v)', t)
+    if m:
+        return float(m.group(1))
+    return None
+
+
+def get_first_model_word(text):
+    """Get the first significant word of the model (e.g., GOL, SCENIC, CELTA, FAZER)."""
+    norm = normalize_model(text).upper()
+    for w in norm.split():
+        if w.lower() not in NOISE_WORDS and not re.match(r'^\d', w) and len(w) >= 2:
+            return w
+    return norm.split()[0] if norm.split() else ""
+
+
+def parse_vehicle(description, fab_mod):
+    desc = description.strip()
     if desc.startswith("I/"):
         desc = desc[2:]
     elif desc.startswith("IMP/"):
         desc = desc[4:]
 
-    # Split brand/model
     if "/" in desc:
-        brand = desc.split("/")[0].strip()
+        brand = desc.split("/")[0].strip().upper()
         model = desc.split("/", 1)[1].strip()
     else:
-        # No slash - try to split by space (e.g. "HONDA C100 BIZ")
         parts = desc.split()
-        brand = parts[0]
+        brand = parts[0].upper()
         model = " ".join(parts[1:]) if len(parts) > 1 else ""
 
-    # Parse year (use model year = second value in "fab/mod")
     year = None
     if fab_mod:
-        fab_mod_str = str(fab_mod).strip()
-        parts = fab_mod_str.split("/")
-        year_str = parts[-1].strip()
+        parts = str(fab_mod).strip().split("/")
         try:
-            year = int(year_str)
+            year = int(parts[-1].strip())
         except ValueError:
             pass
 
-    return brand.upper(), model.upper(), year
+    return brand, model, year
 
 
-def detect_vehicle_type(brand, model):
-    """Determine if a vehicle is a car or motorcycle."""
-    brand_upper = brand.upper()
+def is_motorcycle(brand, model):
+    brand_up = brand.upper()
+    model_up = model.upper()
+    if brand_up in BRAND_MAP_MOTOS_API and brand_up not in BRAND_MAP_CARROS:
+        return True
+    if brand_up == "HONDA":
+        return any(kw in model_up or kw in f" {model_up} " for kw in MOTO_KEYWORDS)
+    return False
 
-    # Check if brand is in our map with a definitive type
-    if brand_upper in BRAND_MAP:
-        return BRAND_MAP[brand_upper]
 
-    # Honda: check model keywords
-    if brand_upper == "HONDA":
-        model_upper = model.upper()
-        for kw in MOTO_KEYWORDS:
-            if kw in model_upper:
-                return ("motos", "80")
-        for kw in CAR_KEYWORDS:
-            if kw in model_upper:
-                return ("carros", "25")
-        # Default Honda to moto (more common in Brazil auctions)
-        return ("motos", "80")
+# ─── CSV-based matching for cars ─────────────────────────────────────────
 
-    # Unknown brand - try both
+def load_fipe_csv(filepath):
+    """Load the FIPE CSV into a dictionary indexed by brand."""
+    data = defaultdict(list)
+    with open(filepath, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f, delimiter=";")
+        for row in reader:
+            brand = row["Marca"]
+            data[brand].append({
+                "modelo": row["Modelo"],
+                "ano": int(row["Ano"]) if row["Ano"].isdigit() else None,
+                "valor": row["Valor"],
+                "codigo_fipe": row["CodigoFipe"],
+                "combustivel": row["Combustivel"],
+            })
+    return data
+
+
+def match_car_csv(brand_sheet, model_sheet, year, csv_data):
+    """Match a car against the CSV dataset.
+    Strategy: brand exact -> core model match -> displacement match -> year match -> best text."""
+
+    # Map sheet brand to CSV brand name
+    csv_brand = BRAND_MAP_CARROS.get(brand_sheet.upper())
+    if not csv_brand:
+        return None
+
+    records = csv_data.get(csv_brand, [])
+    if not records:
+        # Try alternate brand names
+        for csv_b, recs in csv_data.items():
+            if brand_sheet.upper() in csv_b.upper() or csv_b.upper() in brand_sheet.upper():
+                records = recs
+                break
+    if not records:
+        return None
+
+    model_norm = normalize_model(model_sheet)
+    model_first_word = get_first_model_word(model_sheet)
+    model_disp = extract_displacement_liters(model_sheet)
+    model_clean = re.sub(r'[^a-z0-9 ]', '', model_norm.lower())
+
+    # Get unique models in CSV
+    unique_models = {}
+    for r in records:
+        if r["modelo"] not in unique_models:
+            unique_models[r["modelo"]] = r
+
+    # Phase 1: Filter by core model name (first word must match)
+    candidates = []
+    for modelo, rec in unique_models.items():
+        fipe_first_word = get_first_model_word(modelo)
+        if model_first_word == fipe_first_word:
+            candidates.append(modelo)
+        elif model_first_word in normalize_model(modelo).upper().split():
+            candidates.append(modelo)
+
+    if not candidates:
+        # Broader fallback: first word appears anywhere
+        for modelo in unique_models:
+            if model_first_word in normalize_model(modelo).upper():
+                candidates.append(modelo)
+
+    if not candidates:
+        return None
+
+    # Phase 2: Filter by displacement
+    if model_disp:
+        disp_match = []
+        for modelo in candidates:
+            fipe_disp = extract_displacement_liters(modelo)
+            if fipe_disp and abs(fipe_disp - model_disp) < 0.05:
+                disp_match.append(modelo)
+        if disp_match:
+            candidates = disp_match
+
+    # Phase 3: Best text match
+    best_score = 0
+    best_modelo = None
+    for modelo in candidates:
+        fipe_clean = re.sub(r'[^a-z0-9 ]', '', normalize_model(modelo).lower())
+        score = SequenceMatcher(None, model_clean, fipe_clean).ratio()
+        if score > best_score:
+            best_score = score
+            best_modelo = modelo
+
+    if not best_modelo:
+        return None
+
+    # Phase 4: Find best year match for this model
+    year_records = [r for r in records if r["modelo"] == best_modelo]
+    if not year_records:
+        return None
+
+    best_rec = None
+    if year:
+        # Exact year
+        for r in year_records:
+            if r["ano"] == year:
+                best_rec = r
+                break
+        # Closest year within 2
+        if not best_rec:
+            closest_diff = 999
+            for r in year_records:
+                if r["ano"] and abs(r["ano"] - year) < closest_diff:
+                    closest_diff = abs(r["ano"] - year)
+                    best_rec = r
+            if closest_diff > 2:
+                best_rec = year_records[0]  # Default to newest
+    else:
+        best_rec = year_records[0]
+
+    if best_rec:
+        return {
+            "valor": best_rec["valor"],
+            "modelo_fipe": best_modelo,
+            "ano": best_rec["ano"],
+            "score": best_score,
+            "codigo_fipe": best_rec["codigo_fipe"],
+        }
     return None
 
 
-def fuzzy_match(needle, haystack, threshold=0.45):
-    """Find the best fuzzy match for needle in a list of {codigo, nome} dicts."""
-    needle_clean = re.sub(r'[^a-z0-9 ]', '', needle.lower()).strip()
-    needle_words = set(needle_clean.split())
+# ─── API-based matching for motos ────────────────────────────────────────
 
+def match_moto_api(brand_sheet, model_sheet, year, cache):
+    """Match a motorcycle against the FIPE API (cached)."""
+    brand_code = BRAND_MAP_MOTOS_API.get(brand_sheet.upper())
+    if not brand_code:
+        return None
+
+    # Get model list
+    models_url = f"{API_BASE}/motos/marcas/{brand_code}/modelos"
+    models_data = api_get(models_url, cache, delay=3.0)
+    if not models_data or "modelos" not in models_data:
+        return None
+
+    models_list = models_data["modelos"]
+    model_norm = normalize_model(model_sheet)
+    model_first = get_first_model_word(model_sheet)
+    model_cc = extract_cc(model_sheet)
+    model_clean = re.sub(r'[^a-z0-9 ]', '', model_norm.lower())
+
+    # Phase 1: Core name filter
+    candidates = []
+    for item in models_list:
+        fipe_first = get_first_model_word(item["nome"])
+        fipe_norm = normalize_model(item["nome"]).upper()
+        if model_first == fipe_first:
+            candidates.append(item)
+        elif model_first in fipe_norm.split():
+            candidates.append(item)
+
+    if not candidates:
+        for item in models_list:
+            if model_first in normalize_model(item["nome"]).upper():
+                candidates.append(item)
+
+    if not candidates:
+        return None
+
+    # Phase 2: CC filter
+    if model_cc:
+        cc_exact = [it for it in candidates if extract_cc(it["nome"]) and abs(extract_cc(it["nome"]) - model_cc) <= 5]
+        cc_close = [it for it in candidates if extract_cc(it["nome"]) and abs(extract_cc(it["nome"]) - model_cc) <= 25]
+        if cc_exact:
+            candidates = cc_exact
+        elif cc_close:
+            candidates = cc_close
+
+    # Phase 3: Text match
     best_score = 0
-    best_match = None
-
-    for item in haystack:
-        nome = item["nome"]
-        nome_clean = re.sub(r'[^a-z0-9 ]', '', nome.lower()).strip()
-
-        # Sequence matcher score
-        seq_score = SequenceMatcher(None, needle_clean, nome_clean).ratio()
-
-        # Word overlap bonus
-        nome_words = set(nome_clean.split())
-        common = needle_words & nome_words
-        word_score = len(common) / max(len(needle_words), 1) if needle_words else 0
-
-        # Combined score
-        score = seq_score * 0.6 + word_score * 0.4
-
+    best_item = None
+    for item in candidates:
+        fipe_clean = re.sub(r'[^a-z0-9 ]', '', normalize_model(item["nome"]).lower())
+        score = SequenceMatcher(None, model_clean, fipe_clean).ratio()
         if score > best_score:
             best_score = score
-            best_match = item
+            best_item = item
 
-    if best_score >= threshold:
-        return best_match, best_score
-    return None, 0
+    if not best_item:
+        return None
 
+    # Get year and price
+    anos_url = f"{API_BASE}/motos/marcas/{brand_code}/modelos/{best_item['codigo']}/anos"
+    anos_data = api_get(anos_url, cache, delay=1.5)
+    if not anos_data:
+        return None
 
-def find_fipe_value(brand, model, year, cache):
-    """Query FIPE API to find the vehicle value."""
-    vtype_info = detect_vehicle_type(brand, model)
-
-    search_types = []
-    if vtype_info:
-        search_types.append(vtype_info)
-    else:
-        search_types.append(("carros", None))
-        search_types.append(("motos", None))
-
-    for vtype, brand_code in search_types:
-        if not brand_code:
-            brands_url = f"{API_BASE}/{vtype}/marcas"
-            brands_data = api_get(brands_url, cache)
-            if not brands_data:
+    year_code = None
+    if year:
+        for ano in anos_data:
+            try:
+                if int(ano["nome"].split()[0]) == year:
+                    year_code = ano["codigo"]
+                    break
+            except ValueError:
                 continue
-            brand_match, _ = fuzzy_match(brand, brands_data, 0.5)
-            if not brand_match:
-                continue
-            brand_code = brand_match["codigo"]
-
-        # Get models
-        models_url = f"{API_BASE}/{vtype}/marcas/{brand_code}/modelos"
-        models_data = api_get(models_url, cache)
-        if not models_data or "modelos" not in models_data:
-            continue
-
-        models_list = models_data["modelos"]
-        model_match, score = fuzzy_match(model, models_list, 0.35)
-        if not model_match:
-            continue
-
-        model_code = model_match["codigo"]
-        model_name = model_match["nome"]
-
-        # Get available years
-        anos_url = f"{API_BASE}/{vtype}/marcas/{brand_code}/modelos/{model_code}/anos"
-        anos_data = api_get(anos_url, cache)
-        if not anos_data:
-            continue
-
-        # Find matching year
-        year_code = None
-        if year:
+        if not year_code:
+            closest_diff = 999
+            closest = None
             for ano in anos_data:
-                ano_year = ano["nome"].split()[0] if " " in ano["nome"] else ano["nome"]
                 try:
-                    if int(ano_year) == year:
-                        year_code = ano["codigo"]
-                        break
+                    diff = abs(int(ano["nome"].split()[0]) - year)
+                    if diff < closest_diff:
+                        closest_diff = diff
+                        closest = ano
                 except ValueError:
                     continue
+            if closest and closest_diff <= 2:
+                year_code = closest["codigo"]
 
-            # If exact year not found, try closest year
-            if not year_code:
-                closest = None
-                closest_diff = 999
-                for ano in anos_data:
-                    ano_year_str = ano["nome"].split()[0] if " " in ano["nome"] else ano["nome"]
-                    try:
-                        ano_year = int(ano_year_str)
-                        diff = abs(ano_year - year)
-                        if diff < closest_diff:
-                            closest_diff = diff
-                            closest = ano
-                    except ValueError:
-                        continue
-                if closest and closest_diff <= 2:
-                    year_code = closest["codigo"]
+    if not year_code and anos_data:
+        year_code = anos_data[0]["codigo"]
 
-        if not year_code and anos_data:
-            year_code = anos_data[0]["codigo"]
+    if not year_code:
+        return None
 
-        if not year_code:
-            continue
-
-        # Get price
-        price_url = f"{API_BASE}/{vtype}/marcas/{brand_code}/modelos/{model_code}/anos/{year_code}"
-        price_data = api_get(price_url, cache)
-        if price_data and "Valor" in price_data:
-            return {
-                "valor": price_data["Valor"],
-                "modelo_fipe": price_data.get("Modelo", model_name),
-                "ano": price_data.get("AnoModelo", year),
-                "combustivel": price_data.get("Combustivel", ""),
-                "codigo_fipe": price_data.get("CodigoFipe", ""),
-                "referencia": price_data.get("MesReferencia", ""),
-                "match_score": round(score, 2),
-            }
-
+    price_url = f"{API_BASE}/motos/marcas/{brand_code}/modelos/{best_item['codigo']}/anos/{year_code}"
+    price_data = api_get(price_url, cache, delay=1.5)
+    if price_data and "Valor" in price_data:
+        return {
+            "valor": price_data["Valor"],
+            "modelo_fipe": best_item["nome"],
+            "ano": price_data.get("AnoModelo"),
+            "score": best_score,
+            "codigo_fipe": price_data.get("CodigoFipe", ""),
+        }
     return None
 
 
@@ -300,76 +424,82 @@ def main():
         sys.exit(1)
 
     input_file = sys.argv[1]
-    base_name = os.path.splitext(input_file)[0]
-    output_file = f"{base_name}_com_fipe.xlsx"
+    output_file = f"{os.path.splitext(input_file)[0]}_com_fipe.xlsx"
 
-    print(f"Reading {input_file}...")
+    print(f"Reading {input_file}...", flush=True)
     wb = openpyxl.load_workbook(input_file)
     ws = wb.active
-
     total_rows = ws.max_row - 1
-    print(f"Found {total_rows} vehicles to process")
+
+    # Load data sources
+    print(f"Loading FIPE CSV ({CSV_FILE})...", flush=True)
+    csv_data = load_fipe_csv(CSV_FILE)
+    print(f"  {sum(len(v) for v in csv_data.values())} car records from {len(csv_data)} brands", flush=True)
 
     cache = load_cache()
+    print(f"  {len(cache)} cached API entries\n", flush=True)
 
     found = 0
     not_found = 0
     errors = []
 
-    fipe_col = 6  # Column F = "Valor tabela Fipe"
-
     for row in range(2, ws.max_row + 1):
-        lote = ws.cell(row, 1).value
-        description = ws.cell(row, 2).value
+        desc = ws.cell(row, 2).value
         fab_mod = ws.cell(row, 4).value
+        lote = ws.cell(row, 1).value
 
-        if not description:
+        if not desc:
             continue
 
-        brand, model, year = parse_vehicle(description, fab_mod)
-        progress = f"[{row-1}/{total_rows}]"
-        print(f"{progress} Lote {lote}: {brand} / {model} / {year}", end=" ... ")
+        brand, model, year = parse_vehicle(desc, fab_mod)
+        idx = row - 1
+        progress = f"[{idx}/{total_rows}]"
+
+        moto = is_motorcycle(brand, model)
 
         try:
-            result = find_fipe_value(brand, model, year, cache)
-            if result:
-                ws.cell(row, fipe_col).value = result["valor"]
-                found += 1
-                print(f"OK -> {result['valor']} (FIPE: {result['modelo_fipe']}, match: {result['match_score']})")
+            if moto:
+                result = match_moto_api(brand, model, year, cache)
             else:
-                ws.cell(row, fipe_col).value = "NAO ENCONTRADO"
-                not_found += 1
-                print("NOT FOUND")
-                errors.append(f"Lote {lote}: {description} ({fab_mod})")
-        except Exception as e:
-            ws.cell(row, fipe_col).value = f"ERRO: {str(e)[:50]}"
-            not_found += 1
-            print(f"ERROR: {e}")
-            errors.append(f"Lote {lote}: {description} - ERROR: {e}")
+                result = match_car_csv(brand, model, year, csv_data)
 
-        # Save cache periodically
-        if (row - 1) % 20 == 0:
+            if result:
+                ws.cell(row, 6).value = result["valor"]
+                found += 1
+                vtype = "MOTO" if moto else "CAR"
+                print(f"{progress} Lote {lote}: {brand}/{model} {year} -> {result['valor']} ({vtype}: {result['modelo_fipe']}, score: {result['score']:.2f})", flush=True)
+            else:
+                ws.cell(row, 6).value = "NAO ENCONTRADO"
+                not_found += 1
+                print(f"{progress} Lote {lote}: {desc} -> NOT FOUND", flush=True)
+                errors.append(f"Lote {lote}: {desc} ({year})")
+
+        except Exception as e:
+            ws.cell(row, 6).value = "ERRO"
+            not_found += 1
+            print(f"{progress} Lote {lote}: ERROR - {e}", flush=True)
+            errors.append(f"Lote {lote}: {desc} - {e}")
+
+        if idx % 50 == 0:
             save_cache(cache)
 
     save_cache(cache)
-
-    print(f"\nSaving to {output_file}...")
     wb.save(output_file)
 
     print(f"\n{'='*50}")
     print(f"RESULTS:")
     print(f"  Total vehicles: {total_rows}")
-    print(f"  Found FIPE value: {found}")
+    print(f"  Found: {found}")
     print(f"  Not found: {not_found}")
-    print(f"  Success rate: {found/total_rows*100:.1f}%")
+    print(f"  Success rate: {found/max(total_rows,1)*100:.1f}%")
     print(f"{'='*50}")
 
     if errors:
-        print(f"\nVehicles not found ({len(errors)}):")
+        print(f"\nNot found ({len(errors)}):")
         for e in errors:
             print(f"  - {e}")
 
-    print(f"\nOutput saved to: {output_file}")
+    print(f"\nSaved to: {output_file}", flush=True)
 
 
 if __name__ == "__main__":
