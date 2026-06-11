@@ -11436,5 +11436,2025 @@
     "CodigoFipe": "001272-6",
     "MesReferencia": "junho de 2026",
     "SiglaCombustivel": "F"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2790/anos": [
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2790/anos/2002-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.049,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KS",
+    "AnoModelo": 2002,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811021-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4264/anos": [
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4264/anos/2010-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.377,00",
+    "Marca": "HONDA",
+    "Modelo": "POP 100 97cc",
+    "AnoModelo": 2010,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811085-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/8143/anos/2024-5": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 22.412,00",
+    "Marca": "YAMAHA",
+    "Modelo": "FZ25 250 FAZER FLEX",
+    "AnoModelo": 2024,
+    "Combustivel": "Flex",
+    "CodigoFipe": "827107-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "F"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos": [
+    {
+      "codigo": "2016-1",
+      "nome": "2016"
+    },
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos/2012-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.738,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 FACTOR E",
+    "AnoModelo": 2012,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827073-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3963/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.637,00",
+    "Marca": "HONDA",
+    "Modelo": "BIZ 125+",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811084-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2790/anos/2003-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.232,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KS",
+    "AnoModelo": 2003,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811021-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2810/anos": [
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2810/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 10.295,00",
+    "Marca": "HONDA",
+    "Modelo": "NXR 150 BROS ESD",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811068-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2794/anos/2006-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.484,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 TITAN-ES",
+    "AnoModelo": 2006,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811071-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3103/anos/2008-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.217,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 K",
+    "AnoModelo": 2008,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827040-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2780/anos": [
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    },
+    {
+      "codigo": "1998-1",
+      "nome": "1998"
+    },
+    {
+      "codigo": "1997-1",
+      "nome": "1997"
+    },
+    {
+      "codigo": "1996-1",
+      "nome": "1996"
+    },
+    {
+      "codigo": "1995-1",
+      "nome": "1995"
+    },
+    {
+      "codigo": "1994-1",
+      "nome": "1994"
+    },
+    {
+      "codigo": "1993-1",
+      "nome": "1993"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2780/anos/2001-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.120,00",
+    "Marca": "HONDA",
+    "Modelo": "CBX 200 STRADA",
+    "AnoModelo": 2001,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811016-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/98/modelos/2988/anos": [
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/98/modelos/2988/anos/2007-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 2.605,00",
+    "Marca": "SUNDOWN",
+    "Modelo": "WEB 97cc",
+    "AnoModelo": 2007,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "824009-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos": [
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    },
+    {
+      "codigo": "1998-1",
+      "nome": "1998"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos/1998-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 3.720,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ/ 100 BIZ KS",
+    "AnoModelo": 1998,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811003-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2788/anos/1995-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 5.892,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN",
+    "AnoModelo": 1995,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811022-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/7525/anos/2023-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 15.712,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 160 START",
+    "AnoModelo": 2023,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811139-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.464,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ/ 100 BIZ KS",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811003-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/7525/anos/2024-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 16.472,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 160 START",
+    "AnoModelo": 2024,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811139-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos/2011-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.368,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 FACTOR E",
+    "AnoModelo": 2011,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827073-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/98/modelos/4096/anos": [
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/98/modelos/4096/anos/2008-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 3.279,00",
+    "Marca": "SUNDOWN",
+    "Modelo": "WEB EVO 97cc",
+    "AnoModelo": 2008,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "824015-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3103/anos/2002-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 4.608,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 K",
+    "AnoModelo": 2002,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827040-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2791/anos": [
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2791/anos/2003-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.235,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KSE",
+    "AnoModelo": 2003,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811064-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/7388/anos": [
+    {
+      "codigo": "32000-1",
+      "nome": "32000"
+    },
+    {
+      "codigo": "2024-1",
+      "nome": "2024"
+    },
+    {
+      "codigo": "2023-1",
+      "nome": "2023"
+    },
+    {
+      "codigo": "2022-1",
+      "nome": "2022"
+    },
+    {
+      "codigo": "2021-1",
+      "nome": "2021"
+    },
+    {
+      "codigo": "2020-1",
+      "nome": "2020"
+    },
+    {
+      "codigo": "2019-1",
+      "nome": "2019"
+    },
+    {
+      "codigo": "2018-1",
+      "nome": "2018"
+    },
+    {
+      "codigo": "2017-1",
+      "nome": "2017"
+    },
+    {
+      "codigo": "2016-1",
+      "nome": "2016"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/7388/anos/2024-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 16.357,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 150 FACTOR ED/FLEX",
+    "AnoModelo": 2024,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827099-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3963/anos/2006-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.878,00",
+    "Marca": "HONDA",
+    "Modelo": "BIZ 125+",
+    "AnoModelo": 2006,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811084-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3073/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 4.540,00",
+    "Marca": "YAMAHA",
+    "Modelo": "NEO AT 115cc",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827049-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4842/anos/2014-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.693,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 FAN ES",
+    "AnoModelo": 2014,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811091-3",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2793/anos": [
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2793/anos/2007-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.972,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 SPORT",
+    "AnoModelo": 2007,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811077-8",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/145/modelos": {
+    "modelos": [
+      {
+        "codigo": 11935,
+        "nome": "ADXTG 150cc"
+      },
+      {
+        "codigo": 5200,
+        "nome": "APACHE 150cc"
+      },
+      {
+        "codigo": 8677,
+        "nome": "APACHE RTR 200cc"
+      },
+      {
+        "codigo": 7126,
+        "nome": "CITYCLASS 200i"
+      },
+      {
+        "codigo": 5382,
+        "nome": "CITYCOM 300i"
+      },
+      {
+        "codigo": 9070,
+        "nome": "CITYCOM HD 300i"
+      },
+      {
+        "codigo": 7496,
+        "nome": "CITYCOM S 300i/300i ABS"
+      },
+      {
+        "codigo": 9568,
+        "nome": "CRUISYM 150"
+      },
+      {
+        "codigo": 10229,
+        "nome": "CRUISYM 300 "
+      },
+      {
+        "codigo": 7675,
+        "nome": "FIDDLE III 125"
+      },
+      {
+        "codigo": 7381,
+        "nome": "HORIZON 150"
+      },
+      {
+        "codigo": 6494,
+        "nome": "HORIZON 250"
+      },
+      {
+        "codigo": 11387,
+        "nome": "JOYRIDE 300 "
+      },
+      {
+        "codigo": 4588,
+        "nome": "KANSAS 150"
+      },
+      {
+        "codigo": 4910,
+        "nome": "KANSAS 250"
+      },
+      {
+        "codigo": 4589,
+        "nome": "LASER 150"
+      },
+      {
+        "codigo": 11567,
+        "nome": "MAXSYM 400 GT"
+      },
+      {
+        "codigo": 6815,
+        "nome": "MAXSYM 400i"
+      },
+      {
+        "codigo": 5984,
+        "nome": "NEXT 250cc"
+      },
+      {
+        "codigo": 8375,
+        "nome": "NEXT 300cc"
+      },
+      {
+        "codigo": 8973,
+        "nome": "NH 190"
+      },
+      {
+        "codigo": 10643,
+        "nome": "NH 300"
+      },
+      {
+        "codigo": 11308,
+        "nome": "NHX 190"
+      },
+      {
+        "codigo": 5753,
+        "nome": "RIVA 150cc"
+      },
+      {
+        "codigo": 6364,
+        "nome": "RIVA Cargo 150cc"
+      },
+      {
+        "codigo": 5754,
+        "nome": "ROADWIN 250R"
+      },
+      {
+        "codigo": 5119,
+        "nome": "SMART 125cc"
+      },
+      {
+        "codigo": 9155,
+        "nome": "SPEED  Cargo 150"
+      },
+      {
+        "codigo": 4590,
+        "nome": "SPEED 150"
+      },
+      {
+        "codigo": 4591,
+        "nome": "SUPER 100"
+      },
+      {
+        "codigo": 5383,
+        "nome": "SUPER 50"
+      },
+      {
+        "codigo": 5120,
+        "nome": "ZIG 100"
+      },
+      {
+        "codigo": 5587,
+        "nome": "ZIG 100+"
+      },
+      {
+        "codigo": 5657,
+        "nome": "ZIG 50"
+      }
+    ],
+    "anos": [
+      {
+        "codigo": "32000-1",
+        "nome": "32000"
+      },
+      {
+        "codigo": "2027-1",
+        "nome": "2027"
+      },
+      {
+        "codigo": "2026-1",
+        "nome": "2026"
+      },
+      {
+        "codigo": "2025-1",
+        "nome": "2025"
+      },
+      {
+        "codigo": "2024-1",
+        "nome": "2024"
+      },
+      {
+        "codigo": "2023-1",
+        "nome": "2023"
+      },
+      {
+        "codigo": "2022-1",
+        "nome": "2022"
+      },
+      {
+        "codigo": "2021-1",
+        "nome": "2021"
+      },
+      {
+        "codigo": "2020-1",
+        "nome": "2020"
+      },
+      {
+        "codigo": "2019-1",
+        "nome": "2019"
+      },
+      {
+        "codigo": "2018-1",
+        "nome": "2018"
+      },
+      {
+        "codigo": "2017-1",
+        "nome": "2017"
+      },
+      {
+        "codigo": "2016-1",
+        "nome": "2016"
+      },
+      {
+        "codigo": "2015-1",
+        "nome": "2015"
+      },
+      {
+        "codigo": "2014-1",
+        "nome": "2014"
+      },
+      {
+        "codigo": "2013-1",
+        "nome": "2013"
+      },
+      {
+        "codigo": "2012-1",
+        "nome": "2012"
+      },
+      {
+        "codigo": "2011-1",
+        "nome": "2011"
+      },
+      {
+        "codigo": "2010-1",
+        "nome": "2010"
+      },
+      {
+        "codigo": "2009-1",
+        "nome": "2009"
+      },
+      {
+        "codigo": "2008-1",
+        "nome": "2008"
+      }
+    ]
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/145/modelos/4590/anos": [
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/145/modelos/4590/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 4.122,00",
+    "Marca": "DAFRA",
+    "Modelo": "SPEED 150",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "861002-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2791/anos/2004-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.425,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KSE",
+    "AnoModelo": 2004,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811064-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3963/anos/2007-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.079,00",
+    "Marca": "HONDA",
+    "Modelo": "BIZ 125+",
+    "AnoModelo": 2007,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811084-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/11667/anos/2026-5": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 21.691,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 160 TITAN",
+    "AnoModelo": 2026,
+    "Combustivel": "Flex",
+    "CodigoFipe": "811192-8",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "F"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2781/anos/2006-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.653,00",
+    "Marca": "HONDA",
+    "Modelo": "CBX 250 TWISTER",
+    "AnoModelo": 2006,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811061-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4914/anos": [
+    {
+      "codigo": "2010-5",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-5",
+      "nome": "2009"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4914/anos/2010-5": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.946,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 TITAN-ES MIX",
+    "AnoModelo": 2010,
+    "Combustivel": "Flex",
+    "CodigoFipe": "811092-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "F"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4913/anos": [
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    },
+    {
+      "codigo": "2010-1",
+      "nome": "2010"
+    },
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4913/anos/2013-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.442,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 CARGO ES",
+    "AnoModelo": 2013,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811095-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4842/anos/2015-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.949,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 FAN ES",
+    "AnoModelo": 2015,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811091-3",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3063/anos": [
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    },
+    {
+      "codigo": "1998-1",
+      "nome": "1998"
+    },
+    {
+      "codigo": "1997-1",
+      "nome": "1997"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3063/anos/2002-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 3.727,00",
+    "Marca": "YAMAHA",
+    "Modelo": "CRYPTON 100",
+    "AnoModelo": 2002,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827004-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/6567/anos": [
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/6567/anos/2014-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.950,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 FAN ESD",
+    "AnoModelo": 2014,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811117-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/4914/anos/2009-5": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.671,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 TITAN-ES MIX",
+    "AnoModelo": 2009,
+    "Combustivel": "Flex",
+    "CodigoFipe": "811092-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "F"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos/1999-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 4.206,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ/ 100 BIZ KS",
+    "AnoModelo": 1999,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811003-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/134/modelos": {
+    "modelos": [
+      {
+        "codigo": 10145,
+        "nome": "50-Q RAY"
+      },
+      {
+        "codigo": 7299,
+        "nome": "BOLT 250"
+      },
+      {
+        "codigo": 11089,
+        "nome": "FREE 150 EFI"
+      },
+      {
+        "codigo": 11386,
+        "nome": "IRON 250 EFI"
+      },
+      {
+        "codigo": 10233,
+        "nome": "PT-02 2000W (Elétrica)"
+      },
+      {
+        "codigo": 10234,
+        "nome": "PT-02 S 2000W (Elétrica)"
+      },
+      {
+        "codigo": 9671,
+        "nome": "PT-03 2000W (Elétrica)"
+      },
+      {
+        "codigo": 11360,
+        "nome": "PT-03 S 3000W (Elétrica)"
+      },
+      {
+        "codigo": 11388,
+        "nome": "PT-04 Pro 3000W (Elétrica)"
+      },
+      {
+        "codigo": 11389,
+        "nome": "PT-04 Pro S 3000W (Elétrica)"
+      },
+      {
+        "codigo": 7721,
+        "nome": "RETRO EX 50"
+      },
+      {
+        "codigo": 10386,
+        "nome": "SE-1 2000W (Elétrica)"
+      },
+      {
+        "codigo": 9684,
+        "nome": "SE-2 2300W (Elétrica)"
+      },
+      {
+        "codigo": 11003,
+        "nome": "SHE-S 3000W (Elétrica)"
+      },
+      {
+        "codigo": 11980,
+        "nome": "SHI 170"
+      },
+      {
+        "codigo": 10188,
+        "nome": "SHI 175"
+      },
+      {
+        "codigo": 11156,
+        "nome": "SHI 175 S EFI"
+      },
+      {
+        "codigo": 11477,
+        "nome": "SHI 250"
+      },
+      {
+        "codigo": 6861,
+        "nome": "SUN 150"
+      },
+      {
+        "codigo": 7722,
+        "nome": "SUPER SMART 50"
+      },
+      {
+        "codigo": 11331,
+        "nome": "TITANIUM 250 EFI"
+      },
+      {
+        "codigo": 11064,
+        "nome": "URBAN 150 EFI"
+      },
+      {
+        "codigo": 11939,
+        "nome": "URBAN LITE 150"
+      },
+      {
+        "codigo": 9640,
+        "nome": "WORKER 125"
+      },
+      {
+        "codigo": 10855,
+        "nome": "WORKER 150"
+      },
+      {
+        "codigo": 4370,
+        "nome": "XY 110V WAVE"
+      },
+      {
+        "codigo": 6703,
+        "nome": "XY 125 JET"
+      },
+      {
+        "codigo": 10898,
+        "nome": "XY 125 JET SS"
+      },
+      {
+        "codigo": 10899,
+        "nome": "XY 125 JET SS EFI"
+      },
+      {
+        "codigo": 6078,
+        "nome": "XY 125 NEW WAVE"
+      },
+      {
+        "codigo": 11005,
+        "nome": "XY 125 RIO EFI"
+      },
+      {
+        "codigo": 4371,
+        "nome": "XY 125-14 ESD"
+      },
+      {
+        "codigo": 4372,
+        "nome": "XY 150 ZH"
+      },
+      {
+        "codigo": 6862,
+        "nome": "XY 150-5 Fire/Maxi Fire"
+      },
+      {
+        "codigo": 5521,
+        "nome": "XY 150-5 MAX"
+      },
+      {
+        "codigo": 4373,
+        "nome": "XY 150-5 SPEED"
+      },
+      {
+        "codigo": 9073,
+        "nome": "XY 150-8 JEF"
+      },
+      {
+        "codigo": 11209,
+        "nome": "XY 150-8 JEF S"
+      },
+      {
+        "codigo": 11664,
+        "nome": "XY 150-8 JEF S EFI"
+      },
+      {
+        "codigo": 4807,
+        "nome": "XY 150-GY/EXPLORER"
+      },
+      {
+        "codigo": 11210,
+        "nome": "XY 200 STORM EFI"
+      },
+      {
+        "codigo": 5601,
+        "nome": "XY 200-5 A RACING"
+      },
+      {
+        "codigo": 5602,
+        "nome": "XY 200-5 ROAD WIND NAKED"
+      },
+      {
+        "codigo": 4374,
+        "nome": "XY 200-5 SPEED/ XY 200-5"
+      },
+      {
+        "codigo": 4375,
+        "nome": "XY 200-III"
+      },
+      {
+        "codigo": 11332,
+        "nome": "XY 250 DENVER"
+      },
+      {
+        "codigo": 11333,
+        "nome": "XY 250 FLASH EFI"
+      },
+      {
+        "codigo": 4461,
+        "nome": "XY 250-5"
+      },
+      {
+        "codigo": 6729,
+        "nome": "XY 250-6B DISCOVER"
+      },
+      {
+        "codigo": 4376,
+        "nome": "XY 50-Q"
+      },
+      {
+        "codigo": 6903,
+        "nome": "XY 50-Q CROSS"
+      },
+      {
+        "codigo": 10942,
+        "nome": "XY 50-Q JET S"
+      },
+      {
+        "codigo": 5547,
+        "nome": "XY 50-Q PHOENIX"
+      },
+      {
+        "codigo": 11252,
+        "nome": "XY 50-Q PHOENIX S"
+      },
+      {
+        "codigo": 11253,
+        "nome": "XY 50-Q PHOENIX S EFI"
+      },
+      {
+        "codigo": 6366,
+        "nome": "XY 50Q VMV"
+      },
+      {
+        "codigo": 6367,
+        "nome": "XY 50-Q2 RETRO/JET/BIKE"
+      },
+      {
+        "codigo": 7061,
+        "nome": "XY 50Q-2 VENICE"
+      }
+    ],
+    "anos": [
+      {
+        "codigo": "32000-1",
+        "nome": "32000"
+      },
+      {
+        "codigo": "32000-4",
+        "nome": "32000"
+      },
+      {
+        "codigo": "2026-1",
+        "nome": "2026"
+      },
+      {
+        "codigo": "2025-1",
+        "nome": "2025"
+      },
+      {
+        "codigo": "2025-4",
+        "nome": "2025"
+      },
+      {
+        "codigo": "2024-1",
+        "nome": "2024"
+      },
+      {
+        "codigo": "2024-4",
+        "nome": "2024"
+      },
+      {
+        "codigo": "2023-1",
+        "nome": "2023"
+      },
+      {
+        "codigo": "2023-4",
+        "nome": "2023"
+      },
+      {
+        "codigo": "2022-1",
+        "nome": "2022"
+      },
+      {
+        "codigo": "2022-4",
+        "nome": "2022"
+      },
+      {
+        "codigo": "2021-1",
+        "nome": "2021"
+      },
+      {
+        "codigo": "2021-4",
+        "nome": "2021"
+      },
+      {
+        "codigo": "2020-1",
+        "nome": "2020"
+      },
+      {
+        "codigo": "2019-1",
+        "nome": "2019"
+      },
+      {
+        "codigo": "2018-1",
+        "nome": "2018"
+      },
+      {
+        "codigo": "2017-1",
+        "nome": "2017"
+      },
+      {
+        "codigo": "2016-1",
+        "nome": "2016"
+      },
+      {
+        "codigo": "2015-1",
+        "nome": "2015"
+      },
+      {
+        "codigo": "2014-1",
+        "nome": "2014"
+      },
+      {
+        "codigo": "2013-1",
+        "nome": "2013"
+      },
+      {
+        "codigo": "2012-1",
+        "nome": "2012"
+      },
+      {
+        "codigo": "2011-1",
+        "nome": "2011"
+      },
+      {
+        "codigo": "2010-1",
+        "nome": "2010"
+      },
+      {
+        "codigo": "2009-1",
+        "nome": "2009"
+      },
+      {
+        "codigo": "2008-1",
+        "nome": "2008"
+      },
+      {
+        "codigo": "2007-1",
+        "nome": "2007"
+      },
+      {
+        "codigo": "2006-1",
+        "nome": "2006"
+      },
+      {
+        "codigo": "2005-1",
+        "nome": "2005"
+      }
+    ]
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/134/modelos/5547/anos": [
+    {
+      "codigo": "32000-1",
+      "nome": "32000"
+    },
+    {
+      "codigo": "2025-1",
+      "nome": "2025"
+    },
+    {
+      "codigo": "2024-1",
+      "nome": "2024"
+    },
+    {
+      "codigo": "2023-1",
+      "nome": "2023"
+    },
+    {
+      "codigo": "2022-1",
+      "nome": "2022"
+    },
+    {
+      "codigo": "2021-1",
+      "nome": "2021"
+    },
+    {
+      "codigo": "2020-1",
+      "nome": "2020"
+    },
+    {
+      "codigo": "2019-1",
+      "nome": "2019"
+    },
+    {
+      "codigo": "2018-1",
+      "nome": "2018"
+    },
+    {
+      "codigo": "2017-1",
+      "nome": "2017"
+    },
+    {
+      "codigo": "2016-1",
+      "nome": "2016"
+    },
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2011-1",
+      "nome": "2011"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/134/modelos/5547/anos/2012-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 3.041,00",
+    "Marca": "SHINERAY",
+    "Modelo": "XY 50-Q PHOENIX",
+    "AnoModelo": 2012,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "850011-8",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos/2003-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 5.925,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ/ 100 BIZ KS",
+    "AnoModelo": 2003,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811003-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2789/anos": [
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2789/anos/2004-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.476,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-ES",
+    "AnoModelo": 2004,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811020-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2790/anos/2000-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.705,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KS",
+    "AnoModelo": 2000,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811021-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2793/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.317,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 SPORT",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811077-8",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2790/anos/2001-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.873,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 125 TITAN-KS",
+    "AnoModelo": 2001,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811021-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2807/anos": [
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2807/anos/2001-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 14.494,00",
+    "Marca": "HONDA",
+    "Modelo": "NX-4 FALCON 400",
+    "AnoModelo": 2001,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811033-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos/2016-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.553,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 FACTOR E",
+    "AnoModelo": 2016,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827073-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/134/modelos/6366/anos": [
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/134/modelos/6366/anos/2013-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 2.092,00",
+    "Marca": "SHINERAY",
+    "Modelo": "XY 50Q VMV",
+    "AnoModelo": 2013,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "850016-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/98/modelos/2988/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 2.237,00",
+    "Marca": "SUNDOWN",
+    "Modelo": "WEB 97cc",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "824009-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2794/anos/2004-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.800,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 TITAN-ES",
+    "AnoModelo": 2004,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811071-9",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2807/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 16.108,00",
+    "Marca": "HONDA",
+    "Modelo": "NX-4 FALCON 400",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811033-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2764/anos/2000-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 4.808,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ/ 100 BIZ KS",
+    "AnoModelo": 2000,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811003-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos/2010-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.957,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 FACTOR E",
+    "AnoModelo": 2010,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827073-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/7525/anos/2020-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 13.803,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 160 START",
+    "AnoModelo": 2020,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811139-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2793/anos/2006-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.525,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 150 SPORT",
+    "AnoModelo": 2006,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811077-8",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/7525/anos/2021-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 14.311,00",
+    "Marca": "HONDA",
+    "Modelo": "CG 160 START",
+    "AnoModelo": 2021,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811139-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/4742/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.500,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YBR 125 FACTOR E",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827073-2",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3963/anos/2008-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 8.293,00",
+    "Marca": "HONDA",
+    "Modelo": "BIZ 125+",
+    "AnoModelo": 2008,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811084-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3843/anos": [
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/3843/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 9.919,00",
+    "Marca": "HONDA",
+    "Modelo": "NXR 150 BROS ES",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811082-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/6606/anos/2025-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 17.716,00",
+    "Marca": "YAMAHA",
+    "Modelo": "YS 150 FAZER SED/ FLEX",
+    "AnoModelo": 2025,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827088-0",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3067/anos": [
+    {
+      "codigo": "2009-1",
+      "nome": "2009"
+    },
+    {
+      "codigo": "2008-1",
+      "nome": "2008"
+    },
+    {
+      "codigo": "2007-1",
+      "nome": "2007"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3067/anos/2007-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 25.395,00",
+    "Marca": "YAMAHA",
+    "Modelo": "FAZER 600/ FZ6 S",
+    "AnoModelo": 2007,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827051-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3067/anos/2009-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 30.432,00",
+    "Marca": "YAMAHA",
+    "Modelo": "FAZER 600/ FZ6 S",
+    "AnoModelo": 2009,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827051-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2765/anos": [
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2765/anos/2005-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 7.669,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ+",
+    "AnoModelo": 2005,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811065-4",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/101/modelos/3067/anos/2008-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 29.689,00",
+    "Marca": "YAMAHA",
+    "Modelo": "FAZER 600/ FZ6 S",
+    "AnoModelo": 2008,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "827051-1",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2766/anos": [
+    {
+      "codigo": "2015-1",
+      "nome": "2015"
+    },
+    {
+      "codigo": "2014-1",
+      "nome": "2014"
+    },
+    {
+      "codigo": "2013-1",
+      "nome": "2013"
+    },
+    {
+      "codigo": "2012-1",
+      "nome": "2012"
+    },
+    {
+      "codigo": "2006-1",
+      "nome": "2006"
+    },
+    {
+      "codigo": "2005-1",
+      "nome": "2005"
+    },
+    {
+      "codigo": "2004-1",
+      "nome": "2004"
+    },
+    {
+      "codigo": "2003-1",
+      "nome": "2003"
+    },
+    {
+      "codigo": "2002-1",
+      "nome": "2002"
+    },
+    {
+      "codigo": "2001-1",
+      "nome": "2001"
+    },
+    {
+      "codigo": "2000-1",
+      "nome": "2000"
+    },
+    {
+      "codigo": "1999-1",
+      "nome": "1999"
+    }
+  ],
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2766/anos/2003-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 6.325,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ-ES",
+    "AnoModelo": 2003,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811002-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
+  },
+  "https://parallelum.com.br/fipe/api/v1/motos/marcas/80/modelos/2766/anos/2000-1": {
+    "TipoVeiculo": 2,
+    "Valor": "R$ 5.234,00",
+    "Marca": "HONDA",
+    "Modelo": "C 100 BIZ-ES",
+    "AnoModelo": 2000,
+    "Combustivel": "Gasolina",
+    "CodigoFipe": "811002-6",
+    "MesReferencia": "junho de 2026",
+    "SiglaCombustivel": "G"
   }
 }

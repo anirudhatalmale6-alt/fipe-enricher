@@ -31,7 +31,7 @@ BRAND_MAP_CARROS = {
     "FIAT": "Fiat", "FORD": "Ford", "VW": "VW - VolksWagen",
     "PEUGEOT": "Peugeot", "RENAULT": "Renault", "CITROEN": "Citroën",
     "M.BENZ": "Mercedes-Benz", "MERCEDES": "Mercedes-Benz",
-    "TOYOTA": "Toyota", "HYUNDAI": "Hyundai",
+    "TOYOTA": "Toyota", "HYUNDAI": "Hyundai", "HONDA": "Honda",
     "CHERY": "Caoa Chery/Chery", "GEELY": "GEELY",
 }
 
@@ -52,6 +52,15 @@ CAR_KEYWORDS = [
     "CIVIC", "FIT", "CITY", "HR-V", "HRV", "WR-V", "ACCORD", "CR-V",
     "ML", "CLASS", "TUCSON", "CRETA", "HB20", "IX35",
 ]
+
+MODEL_ALIASES = {
+    "MEGANESD": "MEGANE SEDAN",
+    "207HB": "207 HB",
+    "206HB": "206 HB",
+    "307HB": "307 HB",
+    "SCENICEXP": "SCENIC EXP",
+    "EC-7": "EC7",
+}
 
 NOISE_WORDS = {
     "gl", "gls", "glx", "ex", "exs", "lx", "lt", "ltz", "ls", "se", "sx",
@@ -108,11 +117,16 @@ def api_get(url, cache, retries=2, delay=2.0):
     return None
 
 
+SHORT_CODES = {"C3", "C4", "C5", "C8", "X1", "X2", "X3", "X4", "X5", "X6", "S2", "S3", "S4", "S5", "A3", "A4", "A5", "A6", "Q3", "Q5", "Q7"}
+
 def normalize_model(text):
     t = text.strip()
     t = re.sub(r'([A-Za-z])(\d)', r'\1 \2', t)
     t = re.sub(r'(\d)([A-Za-z])', r'\1 \2', t)
     t = re.sub(r'\s+', ' ', t).strip()
+    for code in SHORT_CODES:
+        spaced = f"{code[0]} {code[1:]}"
+        t = re.sub(r'(?<![A-Za-z])' + re.escape(spaced) + r'(?![A-Za-z0-9])', code, t, flags=re.IGNORECASE)
     return t
 
 
@@ -141,12 +155,13 @@ def extract_displacement_liters(text):
 
 
 def get_first_model_word(text):
-    """Get the first significant word of the model (e.g., GOL, SCENIC, CELTA, FAZER)."""
+    """Get the first significant word of the model (e.g., GOL, SCENIC, CELTA, FAZER, 206)."""
     norm = normalize_model(text).upper()
-    for w in norm.split():
-        if w.lower() not in NOISE_WORDS and not re.match(r'^\d', w) and len(w) >= 2:
+    words = norm.split()
+    for w in words:
+        if w.lower() not in NOISE_WORDS and len(w) >= 2:
             return w
-    return norm.split()[0] if norm.split() else ""
+    return words[0] if words else ""
 
 
 def parse_vehicle(description, fab_mod):
@@ -164,6 +179,13 @@ def parse_vehicle(description, fab_mod):
         brand = parts[0].upper()
         model = " ".join(parts[1:]) if len(parts) > 1 else ""
 
+    model_words = model.split()
+    expanded = []
+    for w in model_words:
+        alias = MODEL_ALIASES.get(w.upper())
+        expanded.append(alias if alias else w)
+    model = " ".join(expanded)
+
     year = None
     if fab_mod:
         parts = str(fab_mod).strip().split("/")
@@ -178,6 +200,8 @@ def parse_vehicle(description, fab_mod):
 def is_motorcycle(brand, model):
     brand_up = brand.upper()
     model_up = model.upper()
+    if any(kw in model_up for kw in CAR_KEYWORDS):
+        return False
     if brand_up in BRAND_MAP_MOTOS_API and brand_up not in BRAND_MAP_CARROS:
         return True
     if brand_up == "HONDA":
@@ -460,8 +484,16 @@ def main():
         try:
             if moto:
                 result = match_moto_api(brand, model, year, cache)
+                if not result:
+                    result = match_car_csv(brand, model, year, csv_data)
+                    if result:
+                        moto = False
             else:
                 result = match_car_csv(brand, model, year, csv_data)
+                if not result and brand.upper() in BRAND_MAP_MOTOS_API:
+                    result = match_moto_api(brand, model, year, cache)
+                    if result:
+                        moto = True
 
             if result:
                 ws.cell(row, 6).value = result["valor"]
