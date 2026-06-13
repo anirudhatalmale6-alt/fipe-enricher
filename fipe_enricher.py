@@ -71,6 +71,13 @@ NOISE_WORDS = {
     "gasolina", "alcool", "diesel", "gnv",
 }
 
+COMMERCIAL_KEYWORDS = {"furgao", "furgão", "ambulancia", "ambulância", "pick-up", "pickup", "cabine"}
+
+TRIM_WORDS = {"gl", "gls", "glx", "ex", "exs", "lx", "lxs", "lt", "ltz", "ls", "se", "sx",
+              "dx", "xs", "xr", "cl", "cx", "cd", "ghia", "life", "spirit", "maxx",
+              "city", "trend", "comfort", "comfortline", "trendline", "highline",
+              "attractive", "attractiv", "hatch", "sedan", "sed"}
+
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -228,18 +235,97 @@ def load_fipe_csv(filepath):
     return data
 
 
-def match_car_csv(brand_sheet, model_sheet, year, csv_data):
-    """Match a car against the CSV dataset.
-    Strategy: brand exact -> core model match -> displacement match -> year match -> best text."""
+def get_trim_words(text):
+    """Extract trim-level words from a model string."""
+    words = set()
+    cleaned = re.sub(r'[/\-\(\)]', ' ', normalize_model(text).lower())
+    for w in cleaned.split():
+        w = w.strip('.,;:')
+        if w in TRIM_WORDS:
+            words.add(w)
+    return words
 
-    # Map sheet brand to CSV brand name
+
+def score_model(model_clean, modelo, model_disp, input_trims, year, records):
+    """Score a FIPE model candidate considering text similarity, trim match, year coverage, and commercial penalty."""
+    fipe_lower = modelo.lower()
+
+    # Reject commercial variants unless input explicitly mentions them
+    if any(kw in fipe_lower for kw in COMMERCIAL_KEYWORDS):
+        if not any(kw in model_clean for kw in COMMERCIAL_KEYWORDS):
+            return -1, None
+
+    fipe_clean = re.sub(r'[^a-z0-9 ]', '', normalize_model(modelo).lower())
+    text_score = SequenceMatcher(None, model_clean, fipe_clean).ratio()
+
+    # Trim bonus: reward matching trim words (GL, LX, Life, Spirit, etc.)
+    fipe_trims = get_trim_words(modelo)
+    trim_overlap = len(input_trims & fipe_trims)
+    trim_penalty = len(input_trims - fipe_trims) * 0.05
+    trim_bonus = trim_overlap * 0.15 - trim_penalty
+
+    # Displacement bonus
+    disp_bonus = 0
+    if model_disp:
+        fipe_disp = extract_displacement_liters(modelo)
+        if fipe_disp:
+            if abs(fipe_disp - model_disp) < 0.05:
+                disp_bonus = 0.15
+            elif abs(fipe_disp - model_disp) < 0.3:
+                disp_bonus = 0.05
+            else:
+                disp_bonus = -0.10
+
+    # Year coverage: prefer models whose year range covers the target year
+    year_bonus = 0
+    if year:
+        model_records = [r for r in records if r["modelo"] == modelo]
+        years = [r["ano"] for r in model_records if r["ano"]]
+        if years:
+            if year in years:
+                year_bonus = 0.20
+            else:
+                min_diff = min(abs(y - year) for y in years)
+                if min_diff <= 2:
+                    year_bonus = 0.10
+                elif min_diff <= 5:
+                    year_bonus = 0.0
+                else:
+                    year_bonus = -0.15
+
+    total = text_score + trim_bonus + disp_bonus + year_bonus
+
+    # Find best year record for this model
+    best_rec = None
+    if year:
+        model_records = [r for r in records if r["modelo"] == modelo]
+        for r in model_records:
+            if r["ano"] == year:
+                best_rec = r
+                break
+        if not best_rec:
+            closest_diff = 999
+            for r in model_records:
+                if r["ano"] and abs(r["ano"] - year) < closest_diff:
+                    closest_diff = abs(r["ano"] - year)
+                    best_rec = r
+    if not best_rec:
+        model_records = [r for r in records if r["modelo"] == modelo]
+        if model_records:
+            best_rec = model_records[0]
+
+    return total, best_rec
+
+
+def match_car_csv(brand_sheet, model_sheet, year, csv_data):
+    """Match a car against the CSV dataset."""
+
     csv_brand = BRAND_MAP_CARROS.get(brand_sheet.upper())
     if not csv_brand:
         return None
 
     records = csv_data.get(csv_brand, [])
     if not records:
-        # Try alternate brand names
         for csv_b, recs in csv_data.items():
             if brand_sheet.upper() in csv_b.upper() or csv_b.upper() in brand_sheet.upper():
                 records = recs
@@ -251,16 +337,16 @@ def match_car_csv(brand_sheet, model_sheet, year, csv_data):
     model_first_word = get_first_model_word(model_sheet)
     model_disp = extract_displacement_liters(model_sheet)
     model_clean = re.sub(r'[^a-z0-9 ]', '', model_norm.lower())
+    input_trims = get_trim_words(model_sheet)
 
-    # Get unique models in CSV
     unique_models = {}
     for r in records:
         if r["modelo"] not in unique_models:
             unique_models[r["modelo"]] = r
 
-    # Phase 1: Filter by core model name (first word must match)
+    # Phase 1: Filter by core model name
     candidates = []
-    for modelo, rec in unique_models.items():
+    for modelo in unique_models:
         fipe_first_word = get_first_model_word(modelo)
         if model_first_word == fipe_first_word:
             candidates.append(modelo)
@@ -268,7 +354,6 @@ def match_car_csv(brand_sheet, model_sheet, year, csv_data):
             candidates.append(modelo)
 
     if not candidates:
-        # Broader fallback: first word appears anywhere
         for modelo in unique_models:
             if model_first_word in normalize_model(modelo).upper():
                 candidates.append(modelo)
@@ -276,62 +361,27 @@ def match_car_csv(brand_sheet, model_sheet, year, csv_data):
     if not candidates:
         return None
 
-    # Phase 2: Filter by displacement
-    if model_disp:
-        disp_match = []
-        for modelo in candidates:
-            fipe_disp = extract_displacement_liters(modelo)
-            if fipe_disp and abs(fipe_disp - model_disp) < 0.05:
-                disp_match.append(modelo)
-        if disp_match:
-            candidates = disp_match
-
-    # Phase 3: Best text match
-    best_score = 0
+    # Phase 2: Score all candidates with combined metric
+    best_total = -999
     best_modelo = None
-    for modelo in candidates:
-        fipe_clean = re.sub(r'[^a-z0-9 ]', '', normalize_model(modelo).lower())
-        score = SequenceMatcher(None, model_clean, fipe_clean).ratio()
-        if score > best_score:
-            best_score = score
-            best_modelo = modelo
-
-    if not best_modelo:
-        return None
-
-    # Phase 4: Find best year match for this model
-    year_records = [r for r in records if r["modelo"] == best_modelo]
-    if not year_records:
-        return None
-
     best_rec = None
-    if year:
-        # Exact year
-        for r in year_records:
-            if r["ano"] == year:
-                best_rec = r
-                break
-        # Closest year within 2
-        if not best_rec:
-            closest_diff = 999
-            for r in year_records:
-                if r["ano"] and abs(r["ano"] - year) < closest_diff:
-                    closest_diff = abs(r["ano"] - year)
-                    best_rec = r
-            if closest_diff > 2:
-                best_rec = year_records[0]  # Default to newest
-    else:
-        best_rec = year_records[0]
+    for modelo in candidates:
+        total, rec = score_model(model_clean, modelo, model_disp, input_trims, year, records)
+        if total > best_total and rec:
+            best_total = total
+            best_modelo = modelo
+            best_rec = rec
 
-    if best_rec:
-        return {
-            "valor": best_rec["valor"],
-            "modelo_fipe": best_modelo,
-            "ano": best_rec["ano"],
-            "score": best_score,
-            "codigo_fipe": best_rec["codigo_fipe"],
-        }
-    return None
+    if not best_rec:
+        return None
+
+    return {
+        "valor": best_rec["valor"],
+        "modelo_fipe": best_modelo,
+        "ano": best_rec["ano"],
+        "score": best_total,
+        "codigo_fipe": best_rec["codigo_fipe"],
+    }
 
 
 # ─── API-based matching for motos ────────────────────────────────────────
