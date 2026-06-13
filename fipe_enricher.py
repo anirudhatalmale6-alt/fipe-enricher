@@ -73,6 +73,9 @@ NOISE_WORDS = {
 
 COMMERCIAL_KEYWORDS = {"furgao", "furgão", "ambulancia", "ambulância", "pick-up", "pickup", "cabine"}
 
+PREMIUM_KEYWORDS = {"gti", "gts", "gtx", "turbo", "rally", "ss", "r-line", "rline", "cupê", "coupe",
+                     "cabriolet", "conversivel", "conversível"}
+
 TRIM_WORDS = {"gl", "gls", "glx", "ex", "exs", "lx", "lxs", "lt", "ltz", "ls", "se", "sx",
               "dx", "xs", "xr", "cl", "cx", "cd", "ghia", "life", "spirit", "maxx",
               "city", "trend", "comfort", "comfortline", "trendline", "highline",
@@ -158,6 +161,9 @@ def extract_displacement_liters(text):
     m = re.search(r'\b(\d\.\d)\b(?!\s*v)', t)
     if m:
         return float(m.group(1))
+    m = re.search(r'\b(1000|1500|1600|1800|2000)\b', t)
+    if m:
+        return int(m.group(1)) / 1000.0
     return None
 
 
@@ -249,14 +255,23 @@ def get_trim_words(text):
 def score_model(model_clean, modelo, model_disp, input_trims, year, records):
     """Score a FIPE model candidate considering text similarity, trim match, year coverage, and commercial penalty."""
     fipe_lower = modelo.lower()
+    fipe_lower_nopunct = re.sub(r'[/\-\(\)]', ' ', fipe_lower)
 
     # Reject commercial variants unless input explicitly mentions them
-    if any(kw in fipe_lower for kw in COMMERCIAL_KEYWORDS):
+    if any(kw in fipe_lower_nopunct for kw in COMMERCIAL_KEYWORDS):
         if not any(kw in model_clean for kw in COMMERCIAL_KEYWORDS):
             return -1, None
 
+    # Penalize premium/sporty variants unless input mentions them
+    premium_penalty = 0
+    for kw in PREMIUM_KEYWORDS:
+        if kw in fipe_lower_nopunct.split() or kw in fipe_lower_nopunct:
+            if kw not in model_clean:
+                premium_penalty = -0.25
+                break
+
     fipe_clean = re.sub(r'[^a-z0-9 ]', '', normalize_model(modelo).lower())
-    text_score = SequenceMatcher(None, model_clean, fipe_clean).ratio()
+    text_score = SequenceMatcher(None, model_clean, fipe_clean).ratio() + premium_penalty
 
     # Trim bonus: reward matching trim words (GL, LX, Life, Spirit, etc.)
     fipe_trims = get_trim_words(modelo)
